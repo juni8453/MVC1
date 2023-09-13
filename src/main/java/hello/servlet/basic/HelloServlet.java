@@ -11,8 +11,18 @@ import javax.servlet.http.HttpServletResponse;
 public class HelloServlet extends HttpServlet {
 
   @Override
-  protected void service(HttpServletRequest req, HttpServletResponse resp)
+  // Request -> WAS 에서 HTTP Request, HTTP Response 객체 생성 -> service() 에서 사용
+  protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    System.out.println("HelloServlet.service");
+
+    System.out.println("request = " + request);
+    System.out.println("response = " + response);
+
+    String username = request.getParameter("username");
+    System.out.println("username = " + username);
+
+    response.setContentType("text/plain");
+    response.setCharacterEncoding("utf-8");
+    response.getWriter().write("hello " + username);
   }
 }
